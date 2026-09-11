@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ngip-bg: #F7F8FB;
+  --color-ngip-navy: #101B33;
+  --color-ngip-green: #1FAE7C;
+  --color-ngip-amber: #C99A3E;
+
+  --font-serif: "Fraunces", serif;
+  --font-sans: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-ngip-bg);
+    color: var(--color-ngip-navy);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Custom scrollbar for some internal containers if needed */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 27, 51, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 27, 51, 0.4);
+}
