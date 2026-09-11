@@ -2,8 +2,10 @@ import { motion } from 'framer-motion';
 
 export default function Team() {
   const team = [
-    { name: "Karan Patidar", role: "Co-Founder & Engineer" },
-    { name: "Anurag Yadav", role: "Co-Founder & Engineer" },
+    { name: "Anurag Yadav", role: "Founder" },
+    { name: "Karan Patidar", role: "Founder" },
+    { name: "Krishna Rajbhar", role: "Co-Founder" },
+    { name: "Neelaksh Sharma", role: "Co-Founder" },
   ];
 
   return (
