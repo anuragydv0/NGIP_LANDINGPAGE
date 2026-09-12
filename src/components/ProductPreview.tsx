@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function ProductPreview() {
   return (
-    <section id="product" className="py-32 bg-ngip-bg">
+    <section id="product" className="py-32 bg-ngip-bg scroll-mt-24">
       <div className="container mx-auto px-6 md:px-12 text-center">
         
         <motion.div
@@ -12,7 +12,7 @@ export default function ProductPreview() {
           className="max-w-3xl mx-auto mb-16"
         >
           <div className="inline-block px-3 py-1 bg-black/5 rounded-full text-xs font-mono font-medium mb-6 border border-black/5">
-            Built and tested — not just a concept
+            Built and tested – not just a concept
           </div>
           <h2 className="text-4xl md:text-5xl font-serif font-medium mb-6">
             A real full-stack prototype.
@@ -54,6 +54,7 @@ export default function ProductPreview() {
                     <div className="flex items-center gap-1"><div className="w-2 h-2 bg-ngip-navy"></div> India 40%</div>
                     <div className="flex items-center gap-1"><div className="w-2 h-2 bg-ngip-green"></div> USA 25%</div>
                     <div className="flex items-center gap-1"><div className="w-2 h-2 bg-ngip-amber"></div> Vietnam 15%</div>
+                    <div className="flex items-center gap-1"><div className="w-2 h-2 bg-black/20"></div> Japan 10%</div>
                   </div>
                 </div>
 

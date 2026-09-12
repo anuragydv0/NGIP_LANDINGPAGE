@@ -4,12 +4,11 @@ export default function Team() {
   const team = [
     { name: "Anurag Yadav", role: "Founder" },
     { name: "Karan Patidar", role: "Founder" },
-    { name: "Krishna Rajbhar", role: "Co-Founder" },
-    { name: "Neelaksh Sharma", role: "Co-Founder" },
+   
   ];
 
   return (
-    <section id="team" className="py-32 bg-white">
+    <section id="team" className="py-32 bg-white scroll-mt-24">
       <div className="container mx-auto px-6 md:px-12 max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -17,7 +16,7 @@ export default function Team() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="text-sm font-mono text-ngip-navy/50 mb-4">PARUL UNIVERSITY</div>
+          <div className="text-sm font-mono text-ngip-navy/50 mb-4">NGIP</div>
           <h2 className="text-4xl md:text-5xl font-serif font-medium">The Team</h2>
         </motion.div>
 

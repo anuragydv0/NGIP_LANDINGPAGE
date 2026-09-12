@@ -19,7 +19,7 @@ export default function HowItWorks() {
   const lineHeight = useTransform(scrollYProgress, [0, 0.8], ["0%", "100%"]);
 
   return (
-    <section id="how-it-works" className="py-32 bg-ngip-navy text-white relative">
+    <section id="how-it-works" className="py-32 bg-ngip-navy text-white relative scroll-mt-24">
       <div className="container mx-auto px-6 md:px-12 max-w-4xl">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -39,13 +39,13 @@ export default function HowItWorks() {
             />
           </div>
 
-          <div className="space-y-16">
+          <div className="space-y-10">
             {steps.map((step, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="flex items-start gap-8 relative"
               >

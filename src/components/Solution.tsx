@@ -1,27 +1,19 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
+import { useRef, useEffect } from 'react';
 
-const CountUp = ({ to, duration = 2 }: { to: number, duration?: number }) => {
-  const [count, setCount] = useState(0);
+const CountUp = ({ to, duration = 1.2 }: { to: number, duration?: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, latest => latest.toFixed(1));
 
   useEffect(() => {
     if (isInView) {
-      let start = 0;
-      const end = to;
-      const incrementTime = (duration * 1000) / end;
-      
-      const timer = setInterval(() => {
-        start += 1;
-        setCount(start > end ? end : start);
-        if (start >= end) clearInterval(timer);
-      }, incrementTime);
-      return () => clearInterval(timer);
+      animate(count, to, { duration: duration, ease: "easeOut" });
     }
-  }, [isInView, to, duration]);
+  }, [isInView, to, duration, count]);
 
-  return <span ref={ref}>{count.toFixed(1)}</span>;
+  return <motion.span ref={ref}>{rounded}</motion.span>;
 };
 
 const Bar = ({ label, value, color, delay }: { label: string, value: number, color: string, delay: number }) => {
@@ -47,7 +39,7 @@ const Bar = ({ label, value, color, delay }: { label: string, value: number, col
 
 export default function Solution() {
   return (
-    <section id="index" className="py-32 bg-white relative">
+    <section id="index" className="py-32 bg-white relative scroll-mt-24">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           
@@ -84,7 +76,7 @@ export default function Solution() {
                   ↑ Trending Positive
                 </div>
                 <div className="text-6xl font-mono tracking-tight font-light text-ngip-navy">
-                  <CountUp to={91.4} duration={2} />
+                  <CountUp to={91.4} duration={1.7} />
                   <span className="text-2xl text-ngip-navy/40">/100</span>
                 </div>
               </div>

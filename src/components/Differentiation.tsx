@@ -43,9 +43,9 @@ export default function Differentiation() {
                   className="border-b border-black/5 last:border-0"
                 >
                   <td className="py-6 px-4 font-medium text-ngip-navy/90">{row.feature}</td>
-                  <td className="py-6 px-4 text-center">{row.traditional ? <Check className="w-5 h-5 mx-auto text-black/30" /> : <Minus className="w-5 h-5 mx-auto text-black/10" />}</td>
-                  <td className="py-6 px-4 text-center">{row.robo ? <Check className="w-5 h-5 mx-auto text-black/30" /> : <Minus className="w-5 h-5 mx-auto text-black/10" />}</td>
-                  <td className="py-6 px-4 text-center">{row.macro ? <Check className="w-5 h-5 mx-auto text-black/30" /> : <Minus className="w-5 h-5 mx-auto text-black/10" />}</td>
+                  <td className="py-6 px-4 text-center">{row.traditional ? <Check className="w-5 h-5 min-w-[20px] mx-auto text-black/30 flex-shrink-0" /> : <Minus className="w-5 h-5 min-w-[20px] mx-auto text-black/10 flex-shrink-0" />}</td>
+                  <td className="py-6 px-4 text-center">{row.robo ? <Check className="w-5 h-5 min-w-[20px] mx-auto text-black/30 flex-shrink-0" /> : <Minus className="w-5 h-5 min-w-[20px] mx-auto text-black/10 flex-shrink-0" />}</td>
+                  <td className="py-6 px-4 text-center">{row.macro ? <Check className="w-5 h-5 min-w-[20px] mx-auto text-black/30 flex-shrink-0" /> : <Minus className="w-5 h-5 min-w-[20px] mx-auto text-black/10 flex-shrink-0" />}</td>
                   <td className="py-6 px-4 text-center bg-ngip-bg/50 border-x border-black/5">
                     <motion.div
                       initial={{ scale: 0 }}
@@ -53,7 +53,7 @@ export default function Differentiation() {
                       viewport={{ once: true }}
                       transition={{ type: "spring", delay: 0.3 + (i * 0.1) }}
                     >
-                      <Check className="w-6 h-6 mx-auto text-ngip-green" strokeWidth={3} />
+                      <Check className="w-6 h-6 min-w-[24px] mx-auto text-ngip-green flex-shrink-0" strokeWidth={3} />
                     </motion.div>
                   </td>
                 </motion.tr>

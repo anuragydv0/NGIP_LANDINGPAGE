@@ -1,4 +1,6 @@
 
+import Logo from './Logo';
+import { openContactModal } from './ContactModal';
 
 export default function Footer() {
   return (
@@ -12,9 +14,9 @@ export default function Footer() {
             We are looking for data partnerships, regulatory guidance, and early backers.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="mailto:hello@ngip.com" className="bg-white text-ngip-navy px-8 py-4 rounded-full font-medium hover:bg-white/90 transition-all">
+            <button onClick={openContactModal} className="bg-white text-ngip-navy px-8 py-4 rounded-full font-medium hover:bg-white/90 transition-all cursor-pointer">
               Contact Us
-            </a>
+            </button>
             <a href="https://anurag.social" target="_blank" rel="noreferrer" className="px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/5 transition-all">
               Founder Portfolio
             </a>
@@ -22,7 +24,10 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm font-mono text-white/50">
-          <div className="font-serif font-bold text-xl text-white tracking-tight">NGIP</div>
+          <div className="flex items-center gap-2 font-serif font-bold text-xl text-white tracking-tight">
+            <Logo className="w-8 h-8 text-white" />
+            NGIP
+          </div>
           <div>© 2026. Prototype stage — not a live investment product.</div>
         </div>
       </div>

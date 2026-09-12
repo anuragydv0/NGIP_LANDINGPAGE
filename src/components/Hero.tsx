@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { openContactModal } from './ContactModal';
 
 const TickerItem = ({ country, score, trend, change }: { country: string, score: number, trend: 'up' | 'flat' | 'down', change: string }) => (
   <div className="flex items-center space-x-3 px-4 py-2 border-r border-white/10 last:border-r-0 whitespace-nowrap">
@@ -59,7 +60,7 @@ export default function Hero() {
               See how it works
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/5 transition-all text-white">
+            <button onClick={openContactModal} className="px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/5 transition-all text-white">
               Get in touch
             </button>
           </motion.div>
@@ -71,13 +72,13 @@ export default function Hero() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-0 left-0 w-full border-y border-white/10 bg-white/[0.02] backdrop-blur-md"
+        className="absolute bottom-8 left-0 w-full border-y border-white/10 bg-white/[0.02] backdrop-blur-md"
       >
         <div className="flex overflow-hidden">
           <motion.div 
-            animate={{ x: [0, -1000] }}
+            animate={{ x: ["0%", "-50%"] }}
             transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-            className="flex py-3 items-center"
+            className="flex py-3 items-center w-max"
           >
             {/* Duplicated for seamless loop */}
             {[...Array(2)].map((_, i) => (

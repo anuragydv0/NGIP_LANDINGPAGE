@@ -7,12 +7,12 @@ export default function Problem() {
     { text: "Central Banks", top: "60%", left: "10%", rotate: -5 },
     { text: "Trade Reports", top: "75%", left: "70%", rotate: 15 },
     { text: "News Feeds", top: "40%", left: "80%", rotate: -8 },
-    { text: "Gov Statistics", top: "15%", left: "85%", rotate: 5 },
+    { text: "Gov Statistics", top: "15%", left: "65%", rotate: 5 },
     { text: "Licensed Data", top: "80%", left: "30%", rotate: -10 },
   ];
 
   return (
-    <section id="problem" className="py-32 bg-ngip-bg overflow-hidden relative">
+    <section id="problem" className="py-32 bg-ngip-bg overflow-hidden relative scroll-mt-24">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
@@ -21,10 +21,10 @@ export default function Problem() {
             {tags.map((tag, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ delay: i * 0.1, duration: 0.6, type: 'spring' }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.05, duration: 0.4, ease: 'easeOut' }}
                 className="absolute px-4 py-2 bg-white border border-black/10 shadow-sm rounded-md text-xs font-mono text-ngip-navy/70 whitespace-nowrap"
                 style={{ top: tag.top, left: tag.left, rotate: tag.rotate }}
               >

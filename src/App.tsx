@@ -10,6 +10,7 @@ import Differentiation from './components/Differentiation';
 import BusinessModel from './components/BusinessModel';
 import Team from './components/Team';
 import Footer from './components/Footer';
+import ContactModal from './components/ContactModal';
 
 function App() {
   useEffect(() => {
@@ -35,7 +36,7 @@ function App() {
   }, []);
 
   return (
-    <div className="w-full bg-ngip-bg text-ngip-navy min-h-screen">
+    <div className="w-full bg-ngip-bg text-ngip-navy min-h-screen relative">
       <Nav />
       <Hero />
       <Problem />
@@ -46,6 +47,7 @@ function App() {
       <BusinessModel />
       <Team />
       <Footer />
+      <ContactModal />
     </div>
   );
 }
