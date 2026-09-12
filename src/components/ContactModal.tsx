@@ -10,23 +10,24 @@ export function openContactModal() {
 export default function ContactModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
   
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     name: '',
     email: '',
+    phone: '',
     organization: '',
-    intent: 'Investing',
+    interest: 'Investing',
     message: '',
     _gotcha: '' // honeypot
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const modalRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const firstInputRef = useRef<HTMLInputElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
-  const lastSubmitTime = useRef<number>(0);
 
   useEffect(() => {
     const handleOpen = () => {
@@ -34,6 +35,7 @@ export default function ContactModal() {
       setIsOpen(true);
       setStatus('idle');
       setErrors({});
+      setFormData(initialFormData);
       setTimeout(() => {
         firstInputRef.current?.focus();
       }, 100);
@@ -61,6 +63,7 @@ export default function ContactModal() {
         const focusableElements = modalRef.current.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         );
+        if (focusableElements.length === 0) return;
         const firstElement = focusableElements[0] as HTMLElement;
         const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
 
@@ -121,24 +124,19 @@ export default function ContactModal() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Rate limit (prevent double submit within 3 seconds)
-    const now = Date.now();
-    if (now - lastSubmitTime.current < 3000) return;
-    
     if (!validate()) return;
     
-    // Honeypot check (prevent bot submissions if filled)
+    // Honeypot check
     if (formData._gotcha) {
       setStatus('success');
+      setFormData(initialFormData);
       return;
     }
 
     setStatus('submitting');
-    lastSubmitTime.current = now;
 
     try {
-      // using Formspree endpoint from env or fallback
-      const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL || 'https://formspree.io/f/placeholder'; 
+      const formspreeUrl = import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/meaqdyea'; 
       
       const response = await fetch(formspreeUrl, {
         method: 'POST',
@@ -151,14 +149,11 @@ export default function ContactModal() {
 
       if (response.ok) {
         setStatus('success');
-        setFormData({ ...formData, message: '' }); // Clear message, keep basic details
+        setFormData(initialFormData);
       } else {
-        const data = await response.json();
-        setErrorMessage(data.error || 'Something went wrong. Please try again.');
         setStatus('error');
       }
     } catch (err) {
-      setErrorMessage('Network error. Please check your connection and try again.');
       setStatus('error');
     }
   };
@@ -200,7 +195,7 @@ export default function ContactModal() {
 
             <div className="p-6 overflow-y-auto">
               <div aria-live="polite" className="sr-only">
-                {status === 'success' ? 'Message sent successfully.' : status === 'error' ? errorMessage : ''}
+                {status === 'success' ? 'Message sent successfully.' : status === 'error' ? 'Something went wrong. Please try again.' : ''}
               </div>
 
               {status === 'success' ? (
@@ -211,7 +206,7 @@ export default function ContactModal() {
                     </svg>
                   </div>
                   <h3 className="text-2xl font-serif font-medium mb-2">Message Sent</h3>
-                  <p className="text-ngip-navy/70 mb-8">Thanks — we'll get back to you within a few days.</p>
+                  <p className="text-ngip-navy/70 mb-8">Thanks for reaching out! We'll get back to you soon.</p>
                   <button 
                     onClick={close}
                     className="w-full bg-ngip-navy text-white px-6 py-3 rounded-xl font-medium hover:bg-ngip-navy/90 transition-all active:scale-[0.98]"
@@ -223,7 +218,7 @@ export default function ContactModal() {
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-4" noValidate>
                   {status === 'error' && (
                     <div className="p-3 bg-red-50 border border-red-100 text-red-600 rounded-lg text-sm mb-4">
-                      {errorMessage}
+                      Something went wrong. Please try again.
                     </div>
                   )}
 
@@ -235,6 +230,7 @@ export default function ContactModal() {
                         type="text" 
                         id="name"
                         name="name"
+                        placeholder="Your Name"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -251,6 +247,7 @@ export default function ContactModal() {
                         type="email" 
                         id="email"
                         name="email"
+                        placeholder="Your Email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -263,25 +260,40 @@ export default function ContactModal() {
                     </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="organization" className="block text-sm font-medium text-ngip-navy/80 mb-1">Organization <span className="text-ngip-navy/40 font-normal">(Optional)</span></label>
-                    <input 
-                      type="text" 
-                      id="organization"
-                      name="organization"
-                      value={formData.organization}
-                      onChange={(e) => setFormData({...formData, organization: e.target.value})}
-                      className="w-full px-4 py-2.5 rounded-lg border border-black/10 focus:outline-none focus:ring-4 focus:ring-ngip-navy/20 focus:border-ngip-navy transition-all bg-white"
-                    />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-ngip-navy/80 mb-1">Phone <span className="text-ngip-navy/40 font-normal">(Optional)</span></label>
+                      <input 
+                        type="tel" 
+                        id="phone"
+                        name="phone"
+                        placeholder="Phone Number"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        className="w-full px-4 py-2.5 rounded-lg border border-black/10 focus:outline-none focus:ring-4 focus:ring-ngip-navy/20 focus:border-ngip-navy transition-all bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="organization" className="block text-sm font-medium text-ngip-navy/80 mb-1">Organization <span className="text-ngip-navy/40 font-normal">(Optional)</span></label>
+                      <input 
+                        type="text" 
+                        id="organization"
+                        name="organization"
+                        placeholder="Organization"
+                        value={formData.organization}
+                        onChange={(e) => setFormData({...formData, organization: e.target.value})}
+                        className="w-full px-4 py-2.5 rounded-lg border border-black/10 focus:outline-none focus:ring-4 focus:ring-ngip-navy/20 focus:border-ngip-navy transition-all bg-white"
+                      />
+                    </div>
                   </div>
 
                   <div>
-                    <label htmlFor="intent" className="block text-sm font-medium text-ngip-navy/80 mb-1">What are you looking for?</label>
+                    <label htmlFor="interest" className="block text-sm font-medium text-ngip-navy/80 mb-1">What are you looking for?</label>
                     <select 
-                      id="intent"
-                      name="intent"
-                      value={formData.intent}
-                      onChange={(e) => setFormData({...formData, intent: e.target.value})}
+                      id="interest"
+                      name="interest"
+                      value={formData.interest}
+                      onChange={(e) => setFormData({...formData, interest: e.target.value})}
                       className="w-full px-4 py-2.5 rounded-lg border border-black/10 focus:outline-none focus:ring-4 focus:ring-ngip-navy/20 focus:border-ngip-navy transition-all bg-white appearance-none"
                       style={{ backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23101B33%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem top 50%', backgroundSize: '0.65rem auto' }}
                     >
@@ -298,6 +310,7 @@ export default function ContactModal() {
                     <textarea 
                       id="message"
                       name="message"
+                      placeholder="Your Message"
                       required
                       rows={4}
                       value={formData.message}
