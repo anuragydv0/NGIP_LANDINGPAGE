@@ -9,8 +9,10 @@ import ProductPreview from './components/ProductPreview';
 import Differentiation from './components/Differentiation';
 import BusinessModel from './components/BusinessModel';
 import Team from './components/Team';
+import FaqMarquee from './components/FaqMarquee';
 import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
+import { faqMarqueeData } from './data/faq';
 
 function App() {
   useEffect(() => {
@@ -46,6 +48,12 @@ function App() {
       <Differentiation />
       <BusinessModel />
       <Team />
+      <FaqMarquee 
+        eyebrow="FAQ"
+        title="Common questions, answered"
+        subtitle="Everything you need to know about the Country Growth Index and our platform."
+        rows={faqMarqueeData} 
+      />
       <Footer />
       <ContactModal />
     </div>

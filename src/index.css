@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
   --color-ngip-bg: #F7F8FB;
@@ -35,4 +37,93 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(16, 27, 51, 0.4);
+}
+@theme inline {
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --color-background: var(--bg-0);
+  --color-foreground: var(--text-100);
+}
+
+:root {
+  --bg-0: #09090b;
+  --bg-100: #18181b;
+  --bg-200: #27272a;
+  --bg-300: #3f3f46;
+  --text-100: #fafafa;
+  --text-200: #e4e4e7;
+  --text-300: #a1a1aa;
+  --text-400: #71717a;
+  --radius: 0.5rem;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@utility animate-fade-slide-in-1 {
+  animation: fadeSlideIn 0.8s ease-out forwards;
+}
+@utility animate-fade-slide-in-2 {
+  animation: fadeSlideIn 0.8s ease-out 0.1s forwards;
+  opacity: 0;
+}
+@utility animate-fade-slide-in-3 {
+  animation: fadeSlideIn 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+@utility animate-fade-slide-in-4 {
+  animation: fadeSlideIn 0.8s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-horizontal-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@utility animate-scroll-horizontal {
+  animation: scroll-horizontal var(--scroll-duration, 40s) linear infinite;
+}
+
+@utility animate-scroll-horizontal-reverse {
+  animation: scroll-horizontal-reverse var(--scroll-duration, 40s) linear infinite;
+}
+@theme {
+  --color-surface: #FFFFFF;
+  --color-line: rgba(16, 27, 51, 0.1);
+  --color-ink: #101B33;
+  --color-ink-2: rgba(16, 27, 51, 0.8);
+  --color-ink-3: rgba(16, 27, 51, 0.6);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
