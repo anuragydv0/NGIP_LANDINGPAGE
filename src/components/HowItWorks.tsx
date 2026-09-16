@@ -32,7 +32,7 @@ export default function HowItWorks() {
 
         <div ref={containerRef} className="relative">
           {/* Connecting Line */}
-          <div className="absolute left-[23px] top-0 bottom-0 w-px bg-white/10 hidden md:block">
+          <div className="absolute left-[23.5px] top-0 bottom-0 w-px bg-white/10 hidden md:block z-0">
             <motion.div 
               className="w-full bg-ngip-green origin-top"
               style={{ height: lineHeight }}
@@ -49,7 +49,7 @@ export default function HowItWorks() {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="flex items-start gap-8 relative"
               >
-                <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/20 items-center justify-center font-mono text-sm z-10 relative">
+                <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-full bg-ngip-navy border border-white/20 items-center justify-center font-mono text-sm z-10 relative">
                   0{i + 1}
                   {/* Active indicator */}
                   <motion.div 
